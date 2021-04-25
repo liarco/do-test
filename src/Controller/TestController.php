@@ -15,7 +15,9 @@ class TestController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $form = $this->createForm(TestFormType::class);
+        $form = $this->createForm(TestFormType::class, [], [
+            'csrf_protection' => false,
+        ]);
 
         $form->handleRequest($request);
         
@@ -24,6 +26,7 @@ class TestController extends AbstractController
         }
 
         return $this->render('test/index.html.twig', [
+            'hostname' => gethostname(),
             'form' => $form->createView(),
         ]);
     }
