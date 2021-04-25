@@ -16,13 +16,13 @@ class TestController extends AbstractController
     public function index(Request $request): Response
     {
         $form = $this->createForm(TestFormType::class, [], [
-            'csrf_protection' => false,
+            //'csrf_protection' => false,
         ]);
 
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($form->getData());
+            dd(gethostname(), $form->getData());
         }
 
         return $this->render('test/index.html.twig', [
